@@ -1,0 +1,141 @@
+{
+  "name": "client-gen",
+  "displayName": "Client Generator",
+  "description": "Генерация Python API-клиентов из JSON-коллекций с выбором ручек",
+  "version": "0.1.0",
+  "publisher": "qa",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:clientGen.collections",
+    "onView:clientGen.settings"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Client Generator",
+      "properties": {
+        "clientGen.collectionsPath": {
+          "type": "string",
+          "default": "utils/generate_clients/collections",
+          "description": "Путь к папке с JSON-коллекциями (относительно корня workspace)",
+          "order": 1
+        },
+        "clientGen.outputPath": {
+          "type": "string",
+          "default": "utils/generate_clients/clients",
+          "description": "Путь для сохранения сгенерированных клиентов (относительно корня workspace)",
+          "order": 2
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "client-gen",
+          "title": "Client Generator",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "client-gen": [
+        {
+          "id": "clientGen.collections",
+          "name": "Коллекции"
+        },
+        {
+          "id": "clientGen.settings",
+          "name": "Настройки"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "clientGen.refresh",
+        "title": "Обновить",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "clientGen.generate",
+        "title": "Сгенерировать выбранные",
+        "icon": "$(play)"
+      },
+      {
+        "command": "clientGen.selectAll",
+        "title": "Выбрать все в коллекции"
+      },
+      {
+        "command": "clientGen.deselectAll",
+        "title": "Снять выбор в коллекции"
+      },
+      {
+        "command": "clientGen.editSetting",
+        "title": "Изменить настройку",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "clientGen.openSettings",
+        "title": "Открыть настройки VS Code",
+        "icon": "$(gear)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "clientGen.generate",
+          "when": "view == clientGen.collections",
+          "group": "navigation@1"
+        },
+        {
+          "command": "clientGen.refresh",
+          "when": "view == clientGen.collections",
+          "group": "navigation@2"
+        },
+        {
+          "command": "clientGen.openSettings",
+          "when": "view == clientGen.settings",
+          "group": "navigation@1"
+        },
+        {
+          "command": "clientGen.refresh",
+          "when": "view == clientGen.settings",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "clientGen.selectAll",
+          "when": "view == clientGen.collections && viewItem == collection",
+          "group": "inline@1"
+        },
+        {
+          "command": "clientGen.deselectAll",
+          "when": "view == clientGen.collections && viewItem == collection",
+          "group": "inline@2"
+        },
+        {
+          "command": "clientGen.editSetting",
+          "when": "view == clientGen.settings && viewItem == setting",
+          "group": "inline@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --out postman_client_generator.vsix --allow-missing-repository --skip-license"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.9.2",
+    "typescript": "^5.3.3"
+  }
+}
