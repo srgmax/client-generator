@@ -130,7 +130,7 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "package": "vsce package --out postman_client_generator.vsix --allow-missing-repository --skip-license"
+    "package": "vsce package --out client_generator.vsix --allow-missing-repository --skip-license"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

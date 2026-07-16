@@ -45,12 +45,12 @@ npm install
 npm run package
 ```
 
-Результат: `postman_client_generator.vsix` (совпадает с текущим `out/` и `README.md`).
+Результат: `client_generator.vsix` (совпадает с текущим `out/` и `README.md`).
 
 ## Установка из VSIX
 
 ```bash
-cursor --install-extension postman_client_generator.vsix
+cursor --install-extension client_generator.vsix
 # или
-code --install-extension postman_client_generator.vsix
+code --install-extension client_generator.vsix
 ```
