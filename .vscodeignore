@@ -1,0 +1,12 @@
+.vscode/**
+.vscodeignore
+.gitignore
+.idea/**
+__pycache__/**
+src/**
+tsconfig.json
+node_modules/**
+out/**/*.map
+**/*.ts
+**/*.vsix
+**/.DS_Store
